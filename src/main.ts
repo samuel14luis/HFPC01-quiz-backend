@@ -1,5 +1,5 @@
 import { NestFactory } from '@nestjs/core';
-import { Logger } from '@nestjs/common';
+import { Logger, ValidationPipe } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import * as cors from 'cors';
@@ -12,10 +12,19 @@ async function bootstrap() {
   const apiRoot = "api";
 
   //SETUP
-  const document = SwaggerModule.createDocument(app, swaggerConfig());
-  SwaggerModule.setup(`${apiRoot}/docs`, app, document, swaggerOptions());
   app.setGlobalPrefix(apiRoot);
   app.use(cors());
+  app.useGlobalPipes(
+    new ValidationPipe({
+      transform: true,
+      whitelist: true,
+      forbidNonWhitelisted: true,
+      forbidUnknownValues: true
+    })
+  )
+  
+  const document = SwaggerModule.createDocument(app, swaggerConfig());  
+  SwaggerModule.setup(`${apiRoot}/docs`, app, document, swaggerOptions());
 
   logger.log(`Server running on http://localhost:${port}/${apiRoot}`);
   logger.log(`Swagger UI running on http://localhost:${port}/${apiRoot}/docs`);
