@@ -1,0 +1,20 @@
+steps:
+
+1:
+docker-compose up -d
+
+2:
+docker-compose exec app sh
+
+3:
+npm i -g typescript
+npm i -g @nestjs/cli
+npm i -g yarn
+
+4:
+cd /opt/app
+nest new quiz-backend
+
+5:
+cd /opt/app/quiz-backend
+npm run start:dev
