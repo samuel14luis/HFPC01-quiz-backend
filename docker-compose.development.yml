@@ -1,0 +1,38 @@
+version: '3.8'
+
+# Run with: docker-compose up -d
+
+services:
+  app:
+    image: node:16.15-alpine
+    restart: always
+    env_file: .env
+    command: node /opt/app/quiz-backend/dist/main.js
+    volumes:
+      - type: bind
+        source: ./
+        target: /opt/app/quiz-backend
+    ports:
+      - 3000:3000
+    depends_on:
+      - db
+
+  db:
+    image: mysql    
+    hostname: quizapp
+    restart: always
+    environment:
+      - MYSQL_RANDOM_ROOT_PASSWORD=no
+      - MYSQL_USER=quizusr
+      - MYSQL_PASSWORD=nttl@nd315%aLz
+      - MYSQL_DATABASE=quizappdb
+      - MYSQL_CHARACTER_SET=utf8mb4
+      - MYSQL_COLLATE=utf8mb4_unicode_ci
+      - MARIADB_ROOT_USER=quizadm
+      - MARIADB_ROOT_PASSWORD=a_nttl@nd_cL@&ap
+    ports:
+      - 3306:3306
+    volumes:
+      - quiz_app_db:/var/lib/mysql
+volumes:
+   quiz_app_db:
