@@ -1,8 +1,22 @@
 version: '3.8'
 
-# Run with: docker-compose -f .\docker-compose.mysql.yml up -d
+# Run with: docker-compose up -d
 
 services:
+  app:
+    image: node:16.15-alpine
+    restart: always
+    env_file: .env
+    command: node /opt/app/quiz-backend/dist/main.js
+    volumes:
+      - type: bind
+        source: ./
+        target: /opt/app/quiz-backend
+    ports:
+      - 3000:3000
+    depends_on:
+      - db
+
   db:
     image: mysql    
     hostname: quizapp
