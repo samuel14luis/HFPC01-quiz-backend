@@ -14,8 +14,8 @@ export class AppConfigController {
   @ApiOperation({ summary: 'Create a new item' })
   @ApiOkResponse({ description: 'The item was created successfully.' })
   @ApiForbiddenResponse({ description: "Forbidden" })
-  async create(@Body() createAppConfigDto: CreateAppConfigDto): Promise<AppConfig> {
-    return await this.service.create(createAppConfigDto);
+  async create(@Body() o: CreateAppConfigDto): Promise<AppConfig> {
+    return await this.service.create(o);
   }
 
   @Get()
