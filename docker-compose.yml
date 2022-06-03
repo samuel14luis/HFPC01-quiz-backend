@@ -4,14 +4,9 @@ version: '3.8'
 
 services:
   app:
-    image: node:16.15-alpine
+    image: samuel14luis/quiz_backend:0.0.4-SNAPSHOT
     restart: always
     env_file: .env
-    command: node /opt/app/quiz-backend/dist/main.js
-    volumes:
-      - type: bind
-        source: ./
-        target: /opt/app/quiz-backend
     ports:
       - 3000:3000
     depends_on:
