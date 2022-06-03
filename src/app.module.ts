@@ -3,6 +3,7 @@ import { AppController } from './app.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppService } from './app.service';
 import { AppConfigModule } from './app-config/app-config.module';
+import { ConfigCategoryModule } from './config-category/config-category.module';
 
 @Module({
   imports: [ TypeOrmModule.forRoot({
@@ -18,7 +19,7 @@ import { AppConfigModule } from './app-config/app-config.module';
       ca: process.env.SSL_CERT,
       rejectUnauthorized: false
     }
-  }), AppConfigModule ],
+  }), AppConfigModule, ConfigCategoryModule ],
   controllers: [AppController],
   providers: [AppService],
 })
