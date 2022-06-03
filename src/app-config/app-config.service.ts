@@ -37,7 +37,7 @@ export class AppConfigService {
 
     if(!o) throw new NotFoundException(`Cannot find an item with id ${key}.`);
 
-    return o;
+    return this.repository.save(o);
   }
 
   async remove(key: string): Promise<void> {
