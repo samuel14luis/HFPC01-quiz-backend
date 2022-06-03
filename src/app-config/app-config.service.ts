@@ -10,9 +10,9 @@ export class AppConfigService {
 
   constructor(@InjectRepository(AppConfig) private readonly repository: Repository<AppConfig>){}
 
-  async create(o: CreateAppConfigDto): Promise<AppConfig> {
-    const config: AppConfig = await this.repository.create(o);
-    return this.repository.save(config);
+  async create(dto: CreateAppConfigDto): Promise<AppConfig> {
+    const o: AppConfig = await this.repository.create(dto);
+    return this.repository.save(o);
   }
 
   async findAll(): Promise<AppConfig[]> {
@@ -20,31 +20,31 @@ export class AppConfigService {
   }
 
   async findOne(key: string): Promise<AppConfig> {
-    const config = await this.repository.findOneBy({ key });
+    const o = await this.repository.findOneBy({ key });
 
-    if(!config) throw new NotFoundException(`Cannot find the App Config with key ${key}.`);
+    if(!o) throw new NotFoundException(`Cannot find the App Config with key ${key}.`);
 
-    return config;
+    return o;
   }
 
-  async update(key: string, o: UpdateAppConfigDto) {
-    const { category, value } = o;
-    const config: AppConfig = await this.repository.preload({
+  async update(key: string, dto: UpdateAppConfigDto) {
+    const { category, value } = dto;
+    const o: AppConfig = await this.repository.preload({
       key,
       category,
       value
     })
 
-    if(!config) throw new NotFoundException(`Cannot find the App Config with key ${key}.`);
+    if(!o) throw new NotFoundException(`Cannot find the App Config with key ${key}.`);
 
-    return config;
+    return o;
   }
 
   async remove(key: string): Promise<void> {
-    const config: AppConfig = await this.repository.findOneBy({ key });
+    const o: AppConfig = await this.repository.findOneBy({ key });
 
-    if(!config) throw new NotFoundException(`Cannot find the App Config with key ${key}.`);
+    if(!o) throw new NotFoundException(`Cannot find the App Config with key ${key}.`);
 
-    this.repository.remove(config);
+    this.repository.remove(o);
   }
 }
