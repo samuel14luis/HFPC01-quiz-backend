@@ -16,7 +16,7 @@ export class AppConfigService {
   }
 
   async findAll(): Promise<AppConfig[]> {
-    return await this.repository.find();
+    return await this.repository.find({ relations: ['category'] });
   }
 
   async findOne(key: string): Promise<AppConfig> {

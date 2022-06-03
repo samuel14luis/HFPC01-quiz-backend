@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryColumn } from "typeorm";
+import { ConfigCategory } from "./../../config-category/entities/config-category.entity";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from "typeorm";
 
 @Entity({})
 export class AppConfig {
@@ -8,6 +9,7 @@ export class AppConfig {
     @Column()
     value: string;
 
-    @Column()
-    category: string;
+    @ManyToOne( type => ConfigCategory, (category) => category.configs, { cascade: true } )
+    @JoinColumn({ name: 'fk_idCategory'})
+    category: ConfigCategory;
 }

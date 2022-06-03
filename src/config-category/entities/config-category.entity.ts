@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { AppConfig } from "./../../app-config/entities/app-config.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({})
 export class ConfigCategory {
@@ -7,4 +8,7 @@ export class ConfigCategory {
 
     @Column()
     name: string;
+
+    @OneToMany( type => AppConfig, (config) => config.category )
+    configs: AppConfig;
 }
