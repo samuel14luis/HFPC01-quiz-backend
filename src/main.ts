@@ -7,9 +7,8 @@ import * as cors from 'cors';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const logger = new Logger("Main");
-  //const configService = app.get(ConfigService); TODO: config module
-  const port = 3000; //configService.get("RYS_SYSTEM_PORT")
-  const apiRoot = "api";
+  const port = AppModule.port;
+  const apiRoot = AppModule.apiRoot;
 
   //SETUP
   app.setGlobalPrefix(apiRoot);
@@ -29,7 +28,7 @@ async function bootstrap() {
   logger.log(`Server running on http://localhost:${port}/${apiRoot}`);
   logger.log(`Swagger UI running on http://localhost:${port}/${apiRoot}/docs`);
 
-  await app.listen(3000);
+  await app.listen(port);
 }
 
 function swaggerConfig() {
