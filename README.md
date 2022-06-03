@@ -1,261 +1,73 @@
-<div id="top"></div>
-
-<!--
-*** Thanks for checking out the Best-README-Template. If you have a suggestion
-*** that would make this better, please fork the repo and create a pull request
-*** or simply open an issue with the tag "enhancement".
-*** Don't forget to give the project a star!
-*** Thanks again! Now go create something AMAZING! :D
--->
-
-
-<!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
-
-[![Contributors][contributors-shield]][contributors-url] <!--
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
--->
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
-
-
-
-<!-- PROJECT LOGO -->
-<br />
-<div align="center">
-
-<!--
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
-  </a>
--->
-
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
 </p>
 
-<h3 align="center">QUIZ APP BACKEND PROJECT</h3>
+[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
+[circleci-url]: https://circleci.com/gh/nestjs/nest
 
-  <p align="center">
-   Quiz App backend project built with NestJS!
-    <br />
-    <a href="https://github.com/samuel14luis/HFPC01-quiz-backend"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
-    <a href="https://github.com/samuel14luis/HFPC01-quiz-backend">View Demo</a>
-    ·
-    <a href="https://github.com/samuel14luis/HFPC01-quiz-backend/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/samuel14luis/HFPC01-quiz-backend/issues">Request Feature</a>
-  </p>
-</div>
+  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
+    <p align="center">
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
+<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
+<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
+<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
+<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
+<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
+  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
+    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
+  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
+</p>
+  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
+  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
+## Description
 
+[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
-  </ol>
-</details>
+## Installation
 
-
-
-<!-- ABOUT THE PROJECT -->
-## About The Project
-
-This is a Quiz App backend project.
-
-
-### Built With
-
-This section list any major frameworks/libraries used to bootstrap this project. 
-
-* [Nodejs](https://nodejs.org/es/) 16.15.1 LTS
-* [NestJS Framework](https://nestjs.com/) v8.2.6
-* [Typescript Language](https://www.typescriptlang.org/) v4.7.2
-* [Yarn Package Manager](https://yarnpkg.com/) v1.22.18
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-<!-- GETTING STARTED -->
-## Getting Started
-
-This is an example of how you may setting up your project locally.
-To get a local copy up and running follow these simple example steps.
-
-### Prerequisites
-
-```sh
-# NodeJS
-https://nodejs.org/es/download/
-
-# Typescript
-npm i -g typescript
-
-# NestJS
-npm i -g @nestjs/cli
-
-# Yarn
-npm i -g yarn
+```bash
+$ npm install
 ```
 
-### Installation
+## Running the app
 
-```sh
-# Clone the repo
-$ git clone https://github.com/samuel14luis/HFPC01-quiz-backend.git
-
-# Install dependencies
-$ yarn install
-```
-
-### Running the app
-
-```sh
+```bash
 # development
-$ yarn run start
+$ npm run start
 
 # watch mode
-$ yarn run start:dev
+$ npm run start:dev
 
 # production mode
-$ yarn run start:prod
+$ npm run start:prod
 ```
 
-### Test
+## Test
 
-```sh
+```bash
 # unit tests
-$ yarn run test
+$ npm run test
 
 # e2e tests
-$ yarn run test:e2e
+$ npm run test:e2e
 
 # test coverage
-$ yarn run test:cov
+$ npm run test:cov
 ```
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+## Support
 
+Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
 
+## Stay in touch
 
-<!-- USAGE EXAMPLES -->
-## Usage
+- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
+- Website - [https://nestjs.com](https://nestjs.com/)
+- Twitter - [@nestframework](https://twitter.com/nestframework)
 
-To build a docker image of the jar in a docker image run the following command.
-
-```sh
-# Build image
-docker build -t my_user/quiz-backend:0.0.1-SNAPSHOT .
-```
-<br />
-
-First of all, you need to add the next environment variables to your Operating System:
-
-```sh
-CONFIG_1: "value_1"
-CONFIG_2: "value_2"
-CONFIG_3: "value_3"
-```
-
-<br />
-To run the service with NodeJs run the following command.
-
-```sh
-node index.js
-```
-<br />
-
-To use it with docker-compose you must duplicate the ```docker-compose.override.example.yml``` file and rename it as ```docker-compose.override.yml```,
-then modify the yml file according to your requirements.
-
-
-<br />
-To run the service with docker-compose run the following command.
-
-```
-docker-compose up -d
-```
-
-<br />
-To test if the service is working correctly, go the following URL (port 8089 by default):
-
-```
-http://localhost:3000/
-```
-<br />
-
-<!--
-_For more examples, please refer to the [Documentation](https://example.com)_
--->
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-<!-- LICENSE -->
 ## License
 
-Distributed under the MIT License. See `MIT LICENSE` for more information.
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- CONTACT -->
-<!--## Contact
-
-Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
-
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
-
-<p align="right">(<a href="#top">back to top</a>)</p>
--->
-
-
-
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/BOOTCAMP-BANK-PROJECT/config-server.svg?style=for-the-badge
-[contributors-url]: https://github.com/samuel14luis/HFPC01-quiz-backend/graphs/contributors
-<!--
-[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
-[forks-url]: https://github.com/othneildrew/Best-README-Template/network/members
-[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
-[stars-url]: https://github.com/othneildrew/Best-README-Template/stargazers
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
-[issues-url]: https://github.com/othneildrew/Best-README-Template/issues
--->
-[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
-[license-url]: https://github.com/samuel14luis/HFPC01-quiz-backend/blob/main/LICENSE
-
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://www.linkedin.com/in/samuel14luis/
+Nest is [MIT licensed](LICENSE).
