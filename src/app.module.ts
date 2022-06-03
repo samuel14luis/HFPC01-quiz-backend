@@ -12,9 +12,14 @@ import { AppService } from './app.service';
     password: 'nttl@nd315%aLz',
     database: 'quizappdb',
     autoLoadEntities: true,
-    synchronize: true
+    synchronize: true,
+    ssl: {
+      ca: process.env.SSL_CERT,
+      rejectUnauthorized: false
+    }
   }) ],
   controllers: [AppController],
   providers: [AppService],
 })
+
 export class AppModule {}
