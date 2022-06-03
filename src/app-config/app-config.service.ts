@@ -22,7 +22,7 @@ export class AppConfigService {
   async findOne(key: string): Promise<AppConfig> {
     const o = await this.repository.findOneBy({ key });
 
-    if(!o) throw new NotFoundException(`Cannot find the App Config with key ${key}.`);
+    if(!o) throw new NotFoundException(`Cannot find an item with id ${key}.`);
 
     return o;
   }
@@ -35,7 +35,7 @@ export class AppConfigService {
       value
     })
 
-    if(!o) throw new NotFoundException(`Cannot find the App Config with key ${key}.`);
+    if(!o) throw new NotFoundException(`Cannot find an item with id ${key}.`);
 
     return o;
   }
@@ -43,7 +43,7 @@ export class AppConfigService {
   async remove(key: string): Promise<void> {
     const o: AppConfig = await this.repository.findOneBy({ key });
 
-    if(!o) throw new NotFoundException(`Cannot find the App Config with key ${key}.`);
+    if(!o) throw new NotFoundException(`Cannot find an item with id ${key}.`);
 
     this.repository.remove(o);
   }
