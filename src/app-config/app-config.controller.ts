@@ -6,7 +6,7 @@ import { UpdateAppConfigDto } from './dto/update-app-config.dto';
 import { AppConfig } from './entities/app-config.entity';
 
 @ApiTags('AppConfig')
-@Controller('app-config')
+@Controller('app/config')
 export class AppConfigController {
   constructor(private readonly service: AppConfigService) {}
 

@@ -6,7 +6,7 @@ import { UpdateConfigCategoryDto } from './dto/update-config-category.dto';
 import { ConfigCategory } from './entities/config-category.entity';
 
 @ApiTags('ConfigCategory')
-@Controller('config-category')
+@Controller('app/category')
 export class ConfigCategoryController {
   constructor(private readonly service: ConfigCategoryService) {}
 
