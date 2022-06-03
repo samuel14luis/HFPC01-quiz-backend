@@ -3,7 +3,7 @@ import { Column, Entity, PrimaryColumn } from "typeorm";
 @Entity({})
 export class AppConfig {
     @PrimaryColumn()
-    key: number;
+    key: string;
 
     @Column()
     value: string;

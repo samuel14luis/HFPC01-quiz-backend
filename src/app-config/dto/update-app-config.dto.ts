@@ -1,4 +1,6 @@
-import { PartialType } from '@nestjs/swagger';
+import { OmitType, PartialType } from '@nestjs/swagger';
 import { CreateAppConfigDto } from './create-app-config.dto';
 
-export class UpdateAppConfigDto extends PartialType(CreateAppConfigDto) {}
+export class UpdateAppConfigDto extends OmitType(CreateAppConfigDto, ['key'] as const) {} {
+
+}
