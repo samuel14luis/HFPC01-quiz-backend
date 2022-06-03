@@ -1,4 +1,4 @@
-import { PartialType } from '@nestjs/swagger';
+import { PickType } from '@nestjs/swagger';
 import { CreateConfigCategoryDto } from './create-config-category.dto';
 
-export class UpdateConfigCategoryDto extends PartialType(CreateConfigCategoryDto) {}
+export class UpdateConfigCategoryDto extends PickType(CreateConfigCategoryDto, ['name'] as const) { }

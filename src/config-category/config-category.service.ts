@@ -1,26 +1,49 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateConfigCategoryDto } from './dto/create-config-category.dto';
 import { UpdateConfigCategoryDto } from './dto/update-config-category.dto';
+import { ConfigCategory } from './entities/config-category.entity';
 
 @Injectable()
 export class ConfigCategoryService {
-  create(createConfigCategoryDto: CreateConfigCategoryDto) {
-    return 'This action adds a new configCategory';
+
+  constructor(@InjectRepository(ConfigCategory) private readonly repository: Repository<ConfigCategory>){}
+
+  async create(dto: CreateConfigCategoryDto): Promise<ConfigCategory> {
+    const o: ConfigCategory = await this.repository.create(dto);
+    return this.repository.save(o);
   }
 
-  findAll() {
-    return `This action returns all configCategory`;
+  async findAll(): Promise<ConfigCategory[]> {
+    return await this.repository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} configCategory`;
+  async findOne(id: number): Promise<ConfigCategory> {
+    const o = await this.repository.findOneBy({ id });
+
+    if(!o) throw new NotFoundException(`Cannot find an item with id ${id}.`);
+
+    return o;
   }
 
-  update(id: number, updateConfigCategoryDto: UpdateConfigCategoryDto) {
-    return `This action updates a #${id} configCategory`;
+  async update(id: number, dto: UpdateConfigCategoryDto) {
+    const { name } = dto;
+    const o: ConfigCategory = await this.repository.preload({
+      id,
+      name
+    })
+
+    if(!o) throw new NotFoundException(`Cannot find an item with id ${id}.`);
+
+    return this.repository.save(o);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} configCategory`;
+  async remove(id: number): Promise<void> {
+    const o: ConfigCategory = await this.repository.findOneBy({ id });
+
+    if(!o) throw new NotFoundException(`Cannot find an item with id ${id}.`);
+
+    this.repository.remove(o);
   }
 }
