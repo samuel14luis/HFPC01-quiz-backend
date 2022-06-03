@@ -8,21 +8,21 @@ import { AppConfig } from './entities/app-config.entity';
 @ApiTags('AppConfig')
 @Controller('app-config')
 export class AppConfigController {
-  constructor(private readonly appConfigService: AppConfigService) {}
+  constructor(private readonly service: AppConfigService) {}
 
   @Post()
   @ApiOperation({ summary: 'Create a new app config' })
   @ApiOkResponse({ description: 'AppConfig: The item was created successfully.' })
   @ApiForbiddenResponse({ description: "Forbidden" })
   async create(@Body() createAppConfigDto: CreateAppConfigDto): Promise<AppConfig> {
-    return await this.appConfigService.create(createAppConfigDto);
+    return await this.service.create(createAppConfigDto);
   }
 
   @Get()
   @ApiOperation({ summary: 'List all app configs' })
   @ApiOkResponse({ description: 'AppConfig: The items were listed successfully.' })
   async findAll(): Promise<AppConfig[]> {
-    return await this.appConfigService.findAll();
+    return await this.service.findAll();
   }
 
   @Get(':key')
@@ -30,7 +30,7 @@ export class AppConfigController {
   @ApiOkResponse({ description: 'The item was found successfully.' })
   @ApiNotFoundResponse({ description: 'The item was not found.' })
   async findOne(@Param('key') key: string): Promise<AppConfig> {
-    return await this.appConfigService.findOne(key);
+    return await this.service.findOne(key);
   }
 
   @Patch(':key')
@@ -38,7 +38,7 @@ export class AppConfigController {
   @ApiOkResponse({ description: 'The item was updated successfully.' })
   @ApiNotFoundResponse({ description: 'The item was not found.' })
   async update(@Param('key') key: string, @Body() o: UpdateAppConfigDto): Promise<AppConfig> {
-    return await this.appConfigService.update(key, o);
+    return await this.service.update(key, o);
   }
 
   @Delete(':key')
@@ -46,6 +46,6 @@ export class AppConfigController {
   @ApiOkResponse({ description: 'The item was deleted successfully.' })
   @ApiNotFoundResponse({ description: 'The item was not found.' })
   async remove(@Param('key') key: string): Promise<void> {
-    return await this.appConfigService.remove(key);
+    return await this.service.remove(key);
   }
 }
