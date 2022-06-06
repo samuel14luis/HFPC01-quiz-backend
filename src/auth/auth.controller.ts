@@ -12,6 +12,7 @@ import { AuthService } from './auth.service';
 import { LoginAuthDto } from './dto/login-auth.dto';
 import { RegisterAuthDto } from './dto/register-auth.dto';
 import { User } from './entities/user.entity';
+import { JwtPayload } from './interfaces/payload.interface';
 
 @ApiTags('Auth')
 @Controller('auth')
@@ -30,7 +31,7 @@ export class AuthController {
   @ApiOperation({ summary: 'Login to an account.' })
   @ApiOkResponse({ description: 'The credentials was returned successfully.' })
   @ApiForbiddenResponse({ description: 'Forbidden' })
-  async create(@Body() o: LoginAuthDto): Promise<User> {
+  async create(@Body() o: LoginAuthDto): Promise<JwtPayload> {
     return await this.service.login(o);
   }
 

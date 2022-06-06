@@ -6,12 +6,15 @@ import { Repository } from 'typeorm';
 import { LoginAuthDto } from './dto/login-auth.dto';
 import { RegisterAuthDto } from './dto/register-auth.dto';
 import { User } from './entities/user.entity';
+import { JwtService } from '@nestjs/jwt';
+import { JwtPayload } from './interfaces/payload.interface';
 
 @Injectable()
 export class AuthService {
   constructor(
     @InjectRepository(User)
     private readonly repository: Repository<User>,
+    private readonly jwt: JwtService
   ) {}
 
   async register(dto: RegisterAuthDto): Promise<User> {
@@ -27,7 +30,7 @@ export class AuthService {
     return this.repository.save(o);
   }
 
-  async login(dto: LoginAuthDto): Promise<User> {
+  async login(dto: LoginAuthDto): Promise<JwtPayload> {
     const { username, password } = dto;
 
     const findUser = await this.repository.findOneBy({ username });
@@ -38,7 +41,21 @@ export class AuthService {
 
     if (!checkPassword) throw new ForbiddenException(`The password is incorrect.`);
 
-    return findUser;
+    const payload = {
+      name: findUser.name,
+      shortname: findUser.shortname,
+      username: findUser.username,
+      email: findUser.email
+    }
+    
+    const token = await this.jwt.sign(payload);
+
+    const data = {
+      user: findUser,
+      token
+    }
+
+    return data;
   }
 
   async findAll(): Promise<User[]> {
