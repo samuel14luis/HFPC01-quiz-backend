@@ -8,6 +8,7 @@ import { RegisterAuthDto } from './dto/register-auth.dto';
 import { User } from './entities/user.entity';
 import { JwtService } from '@nestjs/jwt';
 import { JwtPayload } from './interfaces/payload.interface';
+import { UserType } from 'src/user-type/entities/user-type.entity';
 
 @Injectable()
 export class AuthService {
@@ -25,8 +26,13 @@ export class AuthService {
     o.updateDate = new Date();
 
     o.password = await hash(dto.password, 10);
-
+    
     o = await this.repository.create(o);
+    o.userType = new UserType()
+    o.userType.id = dto.idUserType
+    o.user = new User()
+    o.user.id = dto.idUserParent
+
     return this.repository.save(o);
   }
 

@@ -11,6 +11,7 @@ export class AppConfig {
 
   @ManyToOne((type) => ConfigCategory, (category) => category.configs, {
     cascade: true,
+    nullable: false
   })
   @JoinColumn({ name: 'fk_idCategory' })
   category: ConfigCategory;
