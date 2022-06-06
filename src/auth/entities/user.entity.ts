@@ -30,7 +30,7 @@ export class User {
   updateDate: Date;
 
   @OneToOne((type) => User, (user) => user.user, {
-    nullable: false
+    nullable: true
   })
   @JoinColumn({ name: 'fk_idParentUser' })
   user: User;
