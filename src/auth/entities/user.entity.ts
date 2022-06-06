@@ -43,7 +43,7 @@ export class User {
   @JoinColumn({ name: 'fk_idUserType' })
   userType: UserType;
 
-  @OneToMany((type) => TestType, (testType) => testType.users)
-  testType: TestType;
+  @OneToMany((type) => TestType, (testType) => testType.fk_idUserCreator)
+  testTypes: TestType;
 
 }

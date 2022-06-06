@@ -10,7 +10,7 @@ export class TestType {
   @Unique('uniqueName', ['name'])
   name: string;
 
-  @ManyToOne((type) => User, (user) => user.userType, { nullable: false })
+  @ManyToOne((type) => User, (user) => user.testTypes, { nullable: false })
   @JoinColumn({ name: 'fk_idUserCreator' })
-  users: User;
+  fk_idUserCreator: User;
 }
