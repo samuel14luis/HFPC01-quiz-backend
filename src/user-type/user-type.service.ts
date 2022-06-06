@@ -1,26 +1,51 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateUserTypeDto } from './dto/create-user-type.dto';
 import { UpdateUserTypeDto } from './dto/update-user-type.dto';
+import { UserType } from './entities/user-type.entity';
 
 @Injectable()
 export class UserTypeService {
-  create(createUserTypeDto: CreateUserTypeDto) {
-    return 'This action adds a new userType';
+  constructor(
+    @InjectRepository(UserType)
+    private readonly repository: Repository<UserType>,
+  ) {}
+
+  async create(dto: CreateUserTypeDto): Promise<UserType> {
+    const o: UserType = await this.repository.create(dto);
+    return this.repository.save(o);
   }
 
-  findAll() {
-    return `This action returns all userType`;
+  async findAll(): Promise<UserType[]> {
+    return await this.repository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} userType`;
+  async findOne(id: number): Promise<UserType> {
+    const o = await this.repository.findOneBy({ id });
+
+    if (!o) throw new NotFoundException(`Cannot find an item with id ${id}.`);
+
+    return o;
   }
 
-  update(id: number, updateUserTypeDto: UpdateUserTypeDto) {
-    return `This action updates a #${id} userType`;
+  async update(id: number, dto: UpdateUserTypeDto) {
+    const { name } = dto;
+    const o: UserType = await this.repository.preload({
+      id,
+      name,
+    });
+
+    if (!o) throw new NotFoundException(`Cannot find an item with id ${id}.`);
+
+    return this.repository.save(o);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} userType`;
+  async remove(id: number): Promise<void> {
+    const o: UserType = await this.repository.findOneBy({ id });
+
+    if (!o) throw new NotFoundException(`Cannot find an item with id ${id}.`);
+
+    this.repository.remove(o);
   }
 }
