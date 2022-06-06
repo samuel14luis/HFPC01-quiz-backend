@@ -10,6 +10,7 @@ import { UserTypeModule } from './user-type/user-type.module';
 import { BootstrapModule } from './bootstrap/bootstrap.module';
 import { BootstrapService } from './bootstrap/bootstrap.service';
 import { TestModule } from './quiz/test/test.module';
+import { TestTypeModule } from './quiz/test-type/test-type.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { TestModule } from './quiz/test/test.module';
     UserTypeModule,
     BootstrapModule,
     TestModule,
+    TestTypeModule,
   ],
   controllers: [AppController],
   providers: [AppService],
