@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import {
   ApiTags,
@@ -13,12 +14,16 @@ import {
   ApiOkResponse,
   ApiForbiddenResponse,
   ApiNotFoundResponse,
+  ApiBearerAuth,
 } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { AppConfigService } from './app-config.service';
 import { CreateAppConfigDto } from './dto/create-app-config.dto';
 import { UpdateAppConfigDto } from './dto/update-app-config.dto';
 import { AppConfig } from './entities/app-config.entity';
 
+@ApiBearerAuth()
+@UseGuards(JwtAuthGuard)
 @ApiTags('AppConfig')
 @Controller('app/config')
 export class AppConfigController {

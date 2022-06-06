@@ -6,19 +6,24 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import {
+  ApiBearerAuth,
   ApiForbiddenResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
   ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { ConfigCategoryService } from './config-category.service';
 import { CreateConfigCategoryDto } from './dto/create-config-category.dto';
 import { UpdateConfigCategoryDto } from './dto/update-config-category.dto';
 import { ConfigCategory } from './entities/config-category.entity';
 
+@ApiBearerAuth()
+@UseGuards(JwtAuthGuard)
 @ApiTags('ConfigCategory')
 @Controller('app/category')
 export class ConfigCategoryController {
