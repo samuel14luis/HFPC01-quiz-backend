@@ -69,4 +69,9 @@ export class AuthService {
 
     return o;
   }
+
+  async existByUsername(username: string): Promise<Boolean> {
+    const o = await this.repository.findOneBy({ username });
+    return o !== null;
+  }
 }

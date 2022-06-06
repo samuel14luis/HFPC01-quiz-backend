@@ -1,26 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { CreateBootstrapDto } from './dto/create-bootstrap.dto';
-import { UpdateBootstrapDto } from './dto/update-bootstrap.dto';
+import { AuthBootstrap } from 'src/auth/auth.bootstrap';
 
 @Injectable()
 export class BootstrapService {
-  create(createBootstrapDto: CreateBootstrapDto) {
-    return 'This action adds a new bootstrap';
-  }
 
-  findAll() {
-    return `This action returns all bootstrap`;
-  }
+  constructor(private readonly authBootstrap: AuthBootstrap) {}
 
-  findOne(id: number) {
-    return `This action returns a #${id} bootstrap`;
-  }
-
-  update(id: number, updateBootstrapDto: UpdateBootstrapDto) {
-    return `This action updates a #${id} bootstrap`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} bootstrap`;
+  async loadData() {
+    await this.authBootstrap.loadData();
   }
 }

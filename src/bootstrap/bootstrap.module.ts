@@ -1,9 +1,12 @@
 import { Module } from '@nestjs/common';
 import { BootstrapService } from './bootstrap.service';
-import { BootstrapController } from './bootstrap.controller';
+import { AuthModule } from 'src/auth/auth.module';
 
 @Module({
-  controllers: [BootstrapController],
-  providers: [BootstrapService]
+  imports: [AuthModule],
+  controllers: [],
+  providers: [BootstrapService],
+  exports: [BootstrapService]
 })
-export class BootstrapModule {}
+export class BootstrapModule {
+}
