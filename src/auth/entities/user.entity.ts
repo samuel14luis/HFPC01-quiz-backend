@@ -1,7 +1,6 @@
 import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { UserType } from './../../user-type/entities/user-type.entity';
 
-//idUser, nameUser, password, idParent, typeUser, creation_date, update_date, user_creation, emailUser
 @Entity({})
 export class User {
   @PrimaryGeneratedColumn('increment')
@@ -14,10 +13,19 @@ export class User {
   shortname: string;
 
   @Column()
+  email: string;
+
+  @Column()
   username: string;
 
   @Column()
   password: string;
+
+  @Column()
+  creationDate: Date;
+
+  @Column()
+  updateDate: Date;
 
   @OneToOne((type) => User, (user) => user.user)
   @JoinColumn({ name: 'fk_idParentUser' })
@@ -28,4 +36,5 @@ export class User {
   })
   @JoinColumn({ name: 'fk_idUserType' })
   userType: UserType;
+
 }
