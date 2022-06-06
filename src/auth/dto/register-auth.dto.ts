@@ -47,7 +47,7 @@ export class RegisterAuthDto extends PickType(LoginAuthDto, ['username','passwor
     @ApiProperty({
         type: String,
         description: 'password of the user.',
-        default: 'my_weak_password',
+        default: 'my$tr0ngP@ssword',
     })
     @IsNotEmpty()
     @MinLength(8)
@@ -58,7 +58,7 @@ export class RegisterAuthDto extends PickType(LoginAuthDto, ['username','passwor
     @ApiProperty({
         type: String,
         description: 'confirm password of the user.',
-        default: 'my_weak_password',
+        default: 'my$tr0ngP@ssword',
     })
     @IsNotEmpty()
     @MinLength(8)
@@ -66,7 +66,7 @@ export class RegisterAuthDto extends PickType(LoginAuthDto, ['username','passwor
     passwordConfirm: string;
 
     @ApiProperty({
-        type: String,
+        type: Number,
         description: "userId of the user's parent.",
         default: 1,
     })
@@ -76,7 +76,7 @@ export class RegisterAuthDto extends PickType(LoginAuthDto, ['username','passwor
     idUserParent: number;
 
     @ApiProperty({
-        type: String,
+        type: Number,
         description: "id of the user's userType.",
         default: 1,
     })

@@ -7,36 +7,45 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
+import { ApiForbiddenResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 import { LoginAuthDto } from './dto/login-auth.dto';
 import { RegisterAuthDto } from './dto/register-auth.dto';
+import { User } from './entities/user.entity';
 
+@ApiTags('Auth')
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(private readonly service: AuthService) {}
 
-  @Post()
-  create(@Body() dto: LoginAuthDto) {
-    return this.authService.create(dto);
+  @Post('register')
+  @ApiOperation({ summary: 'Register a new user.' })
+  @ApiOkResponse({ description: 'The item was created successfully.' })
+  @ApiForbiddenResponse({ description: 'Forbidden' })
+  async register(@Body() o: RegisterAuthDto): Promise<User> {
+    return await this.service.register(o);
+  }
+
+  @Post('login')
+  @ApiOperation({ summary: 'Login to an account.' })
+  @ApiOkResponse({ description: 'The credentials was returned successfully.' })
+  @ApiForbiddenResponse({ description: 'Forbidden' })
+  async create(@Body() o: LoginAuthDto): Promise<User> {
+    return await this.service.login(o);
   }
 
   @Get()
-  findAll() {
-    return this.authService.findAll();
+  @ApiOperation({ summary: 'List all items' })
+  @ApiOkResponse({ description: 'The items were listed successfully.' })
+  async findAll(): Promise<User[]> {
+    return await this.service.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.authService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAuthDto: RegisterAuthDto) {
-    return this.authService.update(+id, updateAuthDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.authService.remove(+id);
+  @ApiOperation({ summary: 'List one item by id' })
+  @ApiOkResponse({ description: 'The item was found successfully.' })
+  @ApiNotFoundResponse({ description: 'The item was not found.' })
+  async findOne(@Param('id') id: number): Promise<User> {
+    return await this.service.findOne(+id);
   }
 }
