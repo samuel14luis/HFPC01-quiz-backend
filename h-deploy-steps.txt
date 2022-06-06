@@ -1,0 +1,7 @@
+npm run build
+
+docker build -t samuel14luis/quiz_backend:0.0.7 .
+
+docker push samuel14luis/quiz_backend:0.0.7
+
+docker-compose up -d

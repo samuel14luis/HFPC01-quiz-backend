@@ -4,7 +4,7 @@ version: '3.8'
 
 services:
   app:
-    image: samuel14luis/quiz_backend:0.0.6
+    image: samuel14luis/quiz_backend:0.0.7
     restart: always
     env_file: .env
     ports:

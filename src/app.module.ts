@@ -7,6 +7,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { DatabaseModule } from './database/database.module';
 import { AuthModule } from './auth/auth.module';
 import { UserTypeModule } from './user-type/user-type.module';
+import { BootstrapModule } from './bootstrap/bootstrap.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { UserTypeModule } from './user-type/user-type.module';
     DatabaseModule,
     AuthModule,
     UserTypeModule,
+    BootstrapModule,
   ],
   controllers: [AppController],
   providers: [AppService],
