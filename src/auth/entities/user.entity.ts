@@ -1,4 +1,5 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn, Unique } from 'typeorm';
+import { TestType } from 'src/quiz/test-type/entities/test-type.entity';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn, Unique } from 'typeorm';
 import { UserType } from './../../user-type/entities/user-type.entity';
 
 @Entity({})
@@ -41,5 +42,8 @@ export class User {
   })
   @JoinColumn({ name: 'fk_idUserType' })
   userType: UserType;
+
+  @OneToMany((type) => TestType, (testType) => testType.users)
+  testType: TestType;
 
 }
