@@ -1,6 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { UserTypeService } from './user-type.service';
 import { CreateUserTypeDto } from './dto/create-user-type.dto';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class UserTypeBootstrap {
@@ -8,16 +9,22 @@ export class UserTypeBootstrap {
     private readonly logger: Logger;
 
     constructor( 
-        private readonly service: UserTypeService
+        private readonly service: UserTypeService,
+        private readonly config: ConfigService
         ) {
         this.logger = new Logger(UserTypeBootstrap.name)
     }
 
     async loadData(): Promise<void> {
 
+        const userTypes: string[] = this.config.get('QUIZ_SYSTEM_USER_TYPES').split(',');
+        
         await this.create('Admin');
-        await this.create('Teacher');
-        await this.create('Student');
+
+        await userTypes.forEach( async (userType) => {
+            if(userType == null || userType == '') return null;
+            else await this.create(userType);
+        })
         
     }
 
