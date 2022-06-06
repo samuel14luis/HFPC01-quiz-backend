@@ -1,7 +1,7 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { classToPlain, instanceToPlain, plainToClass } from 'class-transformer';
-import { hash } from 'bcrypt';
+import { instanceToPlain, plainToClass } from 'class-transformer';
+import { hash, compare } from 'bcrypt';
 import { Repository } from 'typeorm';
 import { LoginAuthDto } from './dto/login-auth.dto';
 import { RegisterAuthDto } from './dto/register-auth.dto';
@@ -28,8 +28,17 @@ export class AuthService {
   }
 
   async login(dto: LoginAuthDto): Promise<User> {
-    const o: User = await this.repository.create(dto);
-    return this.repository.save(o);
+    const { username, password } = dto;
+
+    const findUser = await this.repository.findOneBy({ username });
+
+    if (!findUser) throw new NotFoundException(`Cannot find a user with username ${username}.`);
+
+    const checkPassword: Boolean = await compare(password, findUser.password);
+
+    if (!checkPassword) throw new ForbiddenException(`The password is incorrect.`);
+
+    return findUser;
   }
 
   async findAll(): Promise<User[]> {

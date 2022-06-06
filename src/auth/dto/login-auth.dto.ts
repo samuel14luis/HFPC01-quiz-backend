@@ -5,7 +5,7 @@ export class LoginAuthDto {
   @ApiProperty({
     type: String,
     description: 'Unique identifier for the user.',
-    default: 'admin',
+    default: 'mycool5',
   })
   @IsNotEmpty()
   username: string;
@@ -13,7 +13,7 @@ export class LoginAuthDto {
   @ApiProperty({
     type: String,
     description: 'Access password.',
-    default: 'my_weak_password',
+    default: 'my$tr0ngP@ssword',
   })
   @IsNotEmpty()
   password: string;
