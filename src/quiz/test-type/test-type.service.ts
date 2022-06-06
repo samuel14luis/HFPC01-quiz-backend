@@ -28,7 +28,8 @@ export class TestTypeService {
       return {
         id: type.id,
         name: type.name,
-        fk_idUserCreator: u
+        fk_idUserCreator: u,
+        tests: null
       }
     })
 
