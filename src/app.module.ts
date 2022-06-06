@@ -6,22 +6,25 @@ import { ConfigCategoryModule } from './config-category/config-category.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { DatabaseModule } from './database/database.module';
 import { AuthModule } from './auth/auth.module';
+import { UserTypeModule } from './user-type/user-type.module';
 
 @Module({
-  imports: [ 
+  imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: [
-        '.env', 
-        '.env.example'],
+      envFilePath: ['.env', '.env.example'],
     }),
-    DatabaseModule, AppConfigModule, ConfigCategoryModule, DatabaseModule, AuthModule ],
+    DatabaseModule,
+    AppConfigModule,
+    ConfigCategoryModule,
+    DatabaseModule,
+    AuthModule,
+    UserTypeModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
-
 export class AppModule {
-
   static port: number;
   static apiRoot: string;
 

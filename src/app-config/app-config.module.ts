@@ -6,8 +6,8 @@ import { AppConfig } from './entities/app-config.entity';
 import { Repository } from 'typeorm';
 
 @Module({
-  imports: [ TypeOrmModule.forFeature([ AppConfig ]) ],
+  imports: [TypeOrmModule.forFeature([AppConfig])],
   controllers: [AppConfigController],
-  providers: [AppConfigService]
+  providers: [AppConfigService],
 })
 export class AppConfigModule {}

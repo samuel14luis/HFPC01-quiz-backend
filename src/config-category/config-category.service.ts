@@ -7,8 +7,10 @@ import { ConfigCategory } from './entities/config-category.entity';
 
 @Injectable()
 export class ConfigCategoryService {
-
-  constructor(@InjectRepository(ConfigCategory) private readonly repository: Repository<ConfigCategory>){}
+  constructor(
+    @InjectRepository(ConfigCategory)
+    private readonly repository: Repository<ConfigCategory>,
+  ) {}
 
   async create(dto: CreateConfigCategoryDto): Promise<ConfigCategory> {
     const o: ConfigCategory = await this.repository.create(dto);
@@ -22,7 +24,7 @@ export class ConfigCategoryService {
   async findOne(id: number): Promise<ConfigCategory> {
     const o = await this.repository.findOneBy({ id });
 
-    if(!o) throw new NotFoundException(`Cannot find an item with id ${id}.`);
+    if (!o) throw new NotFoundException(`Cannot find an item with id ${id}.`);
 
     return o;
   }
@@ -31,10 +33,10 @@ export class ConfigCategoryService {
     const { name } = dto;
     const o: ConfigCategory = await this.repository.preload({
       id,
-      name
-    })
+      name,
+    });
 
-    if(!o) throw new NotFoundException(`Cannot find an item with id ${id}.`);
+    if (!o) throw new NotFoundException(`Cannot find an item with id ${id}.`);
 
     return this.repository.save(o);
   }
@@ -42,7 +44,7 @@ export class ConfigCategoryService {
   async remove(id: number): Promise<void> {
     const o: ConfigCategory = await this.repository.findOneBy({ id });
 
-    if(!o) throw new NotFoundException(`Cannot find an item with id ${id}.`);
+    if (!o) throw new NotFoundException(`Cannot find an item with id ${id}.`);
 
     this.repository.remove(o);
   }

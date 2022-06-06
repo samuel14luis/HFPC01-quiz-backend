@@ -6,7 +6,7 @@ import * as cors from 'cors';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  const logger = new Logger("Main");
+  const logger = new Logger('Main');
   const port = AppModule.port;
   const apiRoot = AppModule.apiRoot;
 
@@ -18,11 +18,11 @@ async function bootstrap() {
       transform: true,
       whitelist: true,
       forbidNonWhitelisted: true,
-      forbidUnknownValues: true
-    })
-  )
-  
-  const document = SwaggerModule.createDocument(app, swaggerConfig());  
+      forbidUnknownValues: true,
+    }),
+  );
+
+  const document = SwaggerModule.createDocument(app, swaggerConfig());
   SwaggerModule.setup(`${apiRoot}/docs`, app, document, swaggerOptions());
 
   logger.log(`Server running on http://localhost:${port}/${apiRoot}`);
@@ -32,12 +32,14 @@ async function bootstrap() {
 }
 
 function swaggerConfig() {
-  return new DocumentBuilder()
-    .setTitle('Quiz App')
-    .setDescription('The Quiz App API documentation')
-    .setVersion('1.0')
-    //.addBearerAuth({ type: 'http', scheme: 'bearer', bearerFormat: 'JWT' }, 'jwt-bearer')
-    .build();
+  return (
+    new DocumentBuilder()
+      .setTitle('Quiz App')
+      .setDescription('The Quiz App API documentation')
+      .setVersion('1.0')
+      //.addBearerAuth({ type: 'http', scheme: 'bearer', bearerFormat: 'JWT' }, 'jwt-bearer')
+      .build()
+  );
 }
 
 function swaggerOptions() {
@@ -46,7 +48,7 @@ function swaggerOptions() {
     swaggerOptions: {
       filter: true,
       showRequestDuration: true,
-    }
+    },
   };
 }
 

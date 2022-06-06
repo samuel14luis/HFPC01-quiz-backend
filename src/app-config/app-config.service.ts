@@ -7,8 +7,10 @@ import { AppConfig } from './entities/app-config.entity';
 
 @Injectable()
 export class AppConfigService {
-
-  constructor(@InjectRepository(AppConfig) private readonly repository: Repository<AppConfig>){}
+  constructor(
+    @InjectRepository(AppConfig)
+    private readonly repository: Repository<AppConfig>,
+  ) {}
 
   async create(dto: CreateAppConfigDto): Promise<AppConfig> {
     const o: AppConfig = await this.repository.create(dto);
@@ -22,7 +24,7 @@ export class AppConfigService {
   async findOne(key: string): Promise<AppConfig> {
     const o = await this.repository.findOneBy({ key });
 
-    if(!o) throw new NotFoundException(`Cannot find an item with id ${key}.`);
+    if (!o) throw new NotFoundException(`Cannot find an item with id ${key}.`);
 
     return o;
   }
@@ -32,10 +34,10 @@ export class AppConfigService {
     const o: AppConfig = await this.repository.preload({
       key,
       category,
-      value
-    })
+      value,
+    });
 
-    if(!o) throw new NotFoundException(`Cannot find an item with id ${key}.`);
+    if (!o) throw new NotFoundException(`Cannot find an item with id ${key}.`);
 
     return this.repository.save(o);
   }
@@ -43,7 +45,7 @@ export class AppConfigService {
   async remove(key: string): Promise<void> {
     const o: AppConfig = await this.repository.findOneBy({ key });
 
-    if(!o) throw new NotFoundException(`Cannot find an item with id ${key}.`);
+    if (!o) throw new NotFoundException(`Cannot find an item with id ${key}.`);
 
     this.repository.remove(o);
   }
