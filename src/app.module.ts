@@ -9,6 +9,7 @@ import { AuthModule } from './auth/auth.module';
 import { UserTypeModule } from './user-type/user-type.module';
 import { BootstrapModule } from './bootstrap/bootstrap.module';
 import { BootstrapService } from './bootstrap/bootstrap.service';
+import { TestModule } from './quiz/test/test.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { BootstrapService } from './bootstrap/bootstrap.service';
     AuthModule,
     UserTypeModule,
     BootstrapModule,
+    TestModule,
   ],
   controllers: [AppController],
   providers: [AppService],
