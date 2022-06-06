@@ -1,5 +1,5 @@
 import { User } from './../../auth/entities/user.entity';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn, Unique } from 'typeorm';
 
 @Entity({})
 export class UserType {
@@ -7,6 +7,7 @@ export class UserType {
   id: number;
 
   @Column()
+  @Unique('uniqueName', ['name'])
   name: string;
 
   @OneToMany((type) => User, (user) => user.userType)

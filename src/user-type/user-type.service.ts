@@ -29,6 +29,11 @@ export class UserTypeService {
     return o;
   }
 
+  async existByName(name: string): Promise<Boolean> {
+    const o = await this.repository.findOneBy({ name });
+    return o !== null;
+  }
+
   async update(id: number, dto: UpdateUserTypeDto) {
     const { name } = dto;
     const o: UserType = await this.repository.preload({
