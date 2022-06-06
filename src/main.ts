@@ -34,6 +34,7 @@ async function bootstrap() {
 function swaggerConfig() {
   return (
     new DocumentBuilder()
+    .addBearerAuth()
       .setTitle('Quiz App')
       .setDescription('The Quiz App API documentation')
       .setVersion('1.0')

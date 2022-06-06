@@ -6,12 +6,14 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
-import { ApiForbiddenResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiForbiddenResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 import { LoginAuthDto } from './dto/login-auth.dto';
 import { RegisterAuthDto } from './dto/register-auth.dto';
 import { User } from './entities/user.entity';
+import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { JwtPayload } from './interfaces/payload.interface';
 
 @ApiTags('Auth')
@@ -20,6 +22,8 @@ export class AuthController {
   constructor(private readonly service: AuthService) {}
 
   @Post('register')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
   @ApiOperation({ summary: 'Register a new user.' })
   @ApiOkResponse({ description: 'The item was created successfully.' })
   @ApiForbiddenResponse({ description: 'Forbidden' })
@@ -36,6 +40,8 @@ export class AuthController {
   }
 
   @Get()
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
   @ApiOperation({ summary: 'List all items' })
   @ApiOkResponse({ description: 'The items were listed successfully.' })
   async findAll(): Promise<User[]> {
@@ -43,6 +49,8 @@ export class AuthController {
   }
 
   @Get(':id')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
   @ApiOperation({ summary: 'List one item by id' })
   @ApiOkResponse({ description: 'The item was found successfully.' })
   @ApiNotFoundResponse({ description: 'The item was not found.' })
