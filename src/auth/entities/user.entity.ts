@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn, Unique } from 'typeorm';
 import { UserType } from './../../user-type/entities/user-type.entity';
 
 @Entity({})
@@ -13,9 +13,11 @@ export class User {
   shortname: string;
 
   @Column()
+  @Unique('uniqueEmail', ['email'])
   email: string;
 
   @Column()
+  @Unique('uniqueUsername', ['username'])
   username: string;
 
   @Column()
