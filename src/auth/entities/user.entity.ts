@@ -1,5 +1,5 @@
 import { Column, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { UserType } from './user-type.entity';
+import { UserType } from './../../user-type/entities/user-type.entity';
 
 //idUser, nameUser, password, idParent, typeUser, creation_date, update_date, user_creation, emailUser
 
