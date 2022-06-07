@@ -32,7 +32,12 @@ export class User {
   @Column()
   updateDate: Date;
 
-  @OneToOne((type) => User, (user) => user.user, {
+  @OneToMany((type) => User, (user) => user.user, {
+    nullable: true
+  })
+  users: User;
+
+  @ManyToOne((type) => User, (user) => user.users, {
     nullable: true
   })
   @JoinColumn({ name: 'fk_idParentUser' })
