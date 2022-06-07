@@ -1,34 +1,57 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { TestService } from './test.service';
 import { CreateTestDto } from './dto/create-test.dto';
 import { UpdateTestDto } from './dto/update-test.dto';
+import { ApiBearerAuth, ApiForbiddenResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { Test } from './entities/test.entity';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
+@ApiBearerAuth()
+@UseGuards(JwtAuthGuard)
+@ApiTags('Test')
 @Controller('test')
 export class TestController {
-  constructor(private readonly testService: TestService) {}
+  constructor(private readonly service: TestService) {}
 
   @Post()
-  create(@Body() createTestDto: CreateTestDto) {
-    return this.testService.create(createTestDto);
+  @ApiOperation({ summary: 'Create a new item' })
+  @ApiOkResponse({ description: 'The item was created successfully.' })
+  @ApiForbiddenResponse({ description: 'Forbidden' })
+  async create(@Body() o: CreateTestDto): Promise<Test> {
+    return await this.service.create(o);
   }
 
   @Get()
-  findAll() {
-    return this.testService.findAll();
+  @ApiOperation({ summary: 'List all items' })
+  @ApiOkResponse({ description: 'The items were listed successfully.' })
+  async findAll(): Promise<Test[]> {
+    return await this.service.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.testService.findOne(+id);
+  @ApiOperation({ summary: 'List one item by id' })
+  @ApiOkResponse({ description: 'The item was found successfully.' })
+  @ApiNotFoundResponse({ description: 'The item was not found.' })
+  async findOne(@Param('id') id: number): Promise<Test> {
+    return await this.service.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateTestDto: UpdateTestDto) {
-    return this.testService.update(+id, updateTestDto);
+  @ApiOperation({ summary: 'Update one item by id' })
+  @ApiOkResponse({ description: 'The item was updated successfully.' })
+  @ApiNotFoundResponse({ description: 'The item was not found.' })
+  async update(
+    @Param('id') id: number,
+    @Body() o: UpdateTestDto,
+  ): Promise<Test> {
+    return await this.service.update(id, o);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.testService.remove(+id);
+  @ApiOperation({ summary: 'Delete one item by id' })
+  @ApiOkResponse({ description: 'The item was deleted successfully.' })
+  @ApiNotFoundResponse({ description: 'The item was not found.' })
+  async remove(@Param('id') id: number): Promise<void> {
+    return await this.service.remove(id);
   }
 }

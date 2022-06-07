@@ -1,5 +1,5 @@
 import { ApiProperty, PickType } from '@nestjs/swagger';
-import { IsDate, IsEmail, IsNotEmpty, IsNumber, IsPositive, Matches, MaxLength, Min, MinLength } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsNumber, IsPositive, Matches, MaxLength, Min, MinLength } from 'class-validator';
 import { LoginAuthDto } from './login-auth.dto';
 
 export class RegisterAuthDto extends PickType(LoginAuthDto, ['username','password'] as const) {

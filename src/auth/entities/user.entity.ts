@@ -1,4 +1,5 @@
 import { TestType } from 'src/quiz/test-type/entities/test-type.entity';
+import { Test } from './../../quiz/test/entities/test.entity';
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn, Unique } from 'typeorm';
 import { UserType } from './../../user-type/entities/user-type.entity';
 
@@ -45,5 +46,8 @@ export class User {
 
   @OneToMany((type) => TestType, (testType) => testType.fk_idUserCreator)
   testTypes: TestType;
+
+  @OneToMany((type) => Test, (test) => test.fk_idUserCreator)
+  tests: Test;
 
 }

@@ -1,8 +1,6 @@
 import { User } from './../../../auth/entities/user.entity';
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, Unique } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, Unique } from 'typeorm';
 import { TestType } from 'src/quiz/test-type/entities/test-type.entity';
-
-// idTest, nameTest, descriptionTest, statatusTest, typeTest, idUserCreator
 
 @Entity({})
 export class Test {
@@ -10,7 +8,6 @@ export class Test {
   id: number;
 
   @Column()
-  @Unique('uniqueName', ['name'])
   name: string;
 
   @Column()
@@ -19,8 +16,18 @@ export class Test {
   @Column()
   status: number;
 
+  @Column()
+  creationDate: Date;
+
+  @Column()
+  updateDate: Date;
+
   @ManyToOne((type) => TestType, (testType) => testType.tests, { nullable: false })
   @JoinColumn({ name: 'fk_idTestType' })
   fk_idTestType: TestType;
+
+  @ManyToOne((type) => User, (user) => user.tests, { nullable: false })
+  @JoinColumn({ name: 'fk_idUserCreator' })
+  fk_idUserCreator: User;
 
 }
