@@ -1,26 +1,56 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateQuestionTypeDto } from './dto/create-question-type.dto';
 import { UpdateQuestionTypeDto } from './dto/update-question-type.dto';
+import { QuestionType } from './entities/question-type.entity';
 
 @Injectable()
 export class QuestionTypeService {
-  create(createQuestionTypeDto: CreateQuestionTypeDto) {
-    return 'This action adds a new questionType';
+  constructor(
+    @InjectRepository(QuestionType)
+    private readonly repository: Repository<QuestionType>,
+  ) {}
+
+  async create(dto: CreateQuestionTypeDto): Promise<QuestionType> {
+    const o: QuestionType = await this.repository.create(dto);
+    return this.repository.save(o);
   }
 
-  findAll() {
-    return `This action returns all questionType`;
+  async findAll(): Promise<QuestionType[]> {
+    return await this.repository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} questionType`;
+  async findOne(id: number): Promise<QuestionType> {
+    const o = await this.repository.findOneBy({ id });
+
+    if (!o) throw new NotFoundException(`Cannot find an item with id ${id}.`);
+
+    return o;
   }
 
-  update(id: number, updateQuestionTypeDto: UpdateQuestionTypeDto) {
-    return `This action updates a #${id} questionType`;
+  async existByName(name: string): Promise<Boolean> {
+    const o = await this.repository.findOneBy({ name });
+    return o !== null;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} questionType`;
+  async update(id: number, dto: UpdateQuestionTypeDto) {
+    const { name } = dto;
+    const o: QuestionType = await this.repository.preload({
+      id,
+      name,
+    });
+
+    if (!o) throw new NotFoundException(`Cannot find an item with id ${id}.`);
+
+    return this.repository.save(o);
+  }
+
+  async remove(id: number): Promise<void> {
+    const o: QuestionType = await this.repository.findOneBy({ id });
+
+    if (!o) throw new NotFoundException(`Cannot find an item with id ${id}.`);
+
+    this.repository.remove(o);
   }
 }

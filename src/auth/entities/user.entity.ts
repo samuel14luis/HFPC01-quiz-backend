@@ -1,7 +1,8 @@
-import { TestType } from 'src/quiz/test-type/entities/test-type.entity';
+import { TestType } from './../../quiz/test-type/entities/test-type.entity';
 import { Test } from './../../quiz/test/entities/test.entity';
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn, Unique } from 'typeorm';
 import { UserType } from './../../user-type/entities/user-type.entity';
+import { QuestionType } from './../../quiz/question-type/entities/question-type.entity';
 
 @Entity({})
 export class User {
@@ -49,5 +50,10 @@ export class User {
 
   @OneToMany((type) => Test, (test) => test.fk_idUserCreator)
   tests: Test;
+
+  @OneToMany((type) => QuestionType, (questionType) => questionType.user, {
+    nullable: false
+  })
+  questionTypes: QuestionType;
 
 }

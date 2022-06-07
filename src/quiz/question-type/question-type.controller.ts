@@ -1,34 +1,57 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { QuestionTypeService } from './question-type.service';
 import { CreateQuestionTypeDto } from './dto/create-question-type.dto';
 import { UpdateQuestionTypeDto } from './dto/update-question-type.dto';
+import { ApiBearerAuth, ApiForbiddenResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { QuestionType } from './entities/question-type.entity';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
+@ApiBearerAuth()
+@UseGuards(JwtAuthGuard)
+@ApiTags('QuestionType')
 @Controller('question-type')
 export class QuestionTypeController {
-  constructor(private readonly questionTypeService: QuestionTypeService) {}
+  constructor(private readonly service: QuestionTypeService) {}
 
   @Post()
-  create(@Body() createQuestionTypeDto: CreateQuestionTypeDto) {
-    return this.questionTypeService.create(createQuestionTypeDto);
+  @ApiOperation({ summary: 'Create a new item' })
+  @ApiOkResponse({ description: 'The item was created successfully.' })
+  @ApiForbiddenResponse({ description: 'Forbidden' })
+  async create(@Body() o: CreateQuestionTypeDto): Promise<QuestionType> {
+    return await this.service.create(o);
   }
 
   @Get()
-  findAll() {
-    return this.questionTypeService.findAll();
+  @ApiOperation({ summary: 'List all items' })
+  @ApiOkResponse({ description: 'The items were listed successfully.' })
+  async findAll(): Promise<QuestionType[]> {
+    return await this.service.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.questionTypeService.findOne(+id);
+  @ApiOperation({ summary: 'List one item by id' })
+  @ApiOkResponse({ description: 'The item was found successfully.' })
+  @ApiNotFoundResponse({ description: 'The item was not found.' })
+  async findOne(@Param('id') id: number): Promise<QuestionType> {
+    return await this.service.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateQuestionTypeDto: UpdateQuestionTypeDto) {
-    return this.questionTypeService.update(+id, updateQuestionTypeDto);
+  @ApiOperation({ summary: 'Update one item by id' })
+  @ApiOkResponse({ description: 'The item was updated successfully.' })
+  @ApiNotFoundResponse({ description: 'The item was not found.' })
+  async update(
+    @Param('id') id: number,
+    @Body() o: UpdateQuestionTypeDto,
+  ): Promise<QuestionType> {
+    return await this.service.update(id, o);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.questionTypeService.remove(+id);
+  @ApiOperation({ summary: 'Delete one item by id' })
+  @ApiOkResponse({ description: 'The item was deleted successfully.' })
+  @ApiNotFoundResponse({ description: 'The item was not found.' })
+  async remove(@Param('id') id: number): Promise<void> {
+    return await this.service.remove(id);
   }
 }
