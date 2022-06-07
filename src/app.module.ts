@@ -11,6 +11,7 @@ import { BootstrapModule } from './bootstrap/bootstrap.module';
 import { BootstrapService } from './bootstrap/bootstrap.service';
 import { TestModule } from './quiz/test/test.module';
 import { TestTypeModule } from './quiz/test-type/test-type.module';
+import { QuestionModule } from './quiz/question/question.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { TestTypeModule } from './quiz/test-type/test-type.module';
     BootstrapModule,
     TestModule,
     TestTypeModule,
+    QuestionModule,
   ],
   controllers: [AppController],
   providers: [AppService],
